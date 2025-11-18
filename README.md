@@ -46,6 +46,14 @@ Unzip and place the contents in the `data/raw` folder.
    docker run -p 5000:5000 cats-classifier
    ```
 
+### Make processed data file executable
+
+Run the following command in your terminal:
+
+```bash
+chmod +x data/cat_breeds_clean.csv
+```
+
 ## Project Structure
 
 - `data/` - Raw and processed data

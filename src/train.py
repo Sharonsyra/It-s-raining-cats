@@ -3,8 +3,14 @@ from sklearn.ensemble import RandomForestClassifier
 import joblib
 from utils import encode_categorical, split_data
 from data_processing import load_data, clean_data
+import os
 
-df = load_data('../data/raw/cat_breeds_clean.csv')
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+file_path = os.path.join(BASE_DIR, 'data', 'cat_breeds_clean.csv')
+model_path = os.path.join(BASE_DIR, 'models', 'cat_breed_model.pkl')
+encoders_path = os.path.join(BASE_DIR, 'models', 'cat_breed_encoders.pkl')
+
+df = load_data(file_path)
 df = clean_data(df)
 
 cat_cols = ['Gender', 'Neutered_or_spayed', 'Fur_colour_dominant', 'Fur_pattern', 'Eye_colour', 'Allowed_outdoor', 'Preferred_food', 'Country']
@@ -21,4 +27,5 @@ model.fit(X_train, y_train)
 val_score = model.score(X_val, y_val)
 print(f'Validation Accuracy: {val_score:.4f}')
 
-joblib.dump(model, '../models/cat_breed_model.pkl')
+joblib.dump(model, model_path)
+joblib.dump(encoders, encoders_path)
