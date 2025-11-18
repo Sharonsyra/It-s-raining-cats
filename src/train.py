@@ -19,7 +19,8 @@ df_encoded, encoders = encode_categorical(df, cat_cols)
 X = df_encoded.drop('Breed', axis=1)
 y = df_encoded['Breed']
 
-X_train, X_val, X_test, y_train, y_val, y_test = split_data(X, y)
+# Split data: 60% train, 20% validation, 20% test
+X_train, X_val, X_test, y_train, y_val, y_test = split_data(X, y, train_size=0.6, val_size=0.2, test_size=0.2)
 
 model = RandomForestClassifier()
 model.fit(X_train, y_train)
